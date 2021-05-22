@@ -42,9 +42,7 @@ namespace SimpleNotebook
         {
             get
             {
-                string rtnstring = Path.GetFileName(FilePath);
-                if (this.UnsavedChanges) rtnstring = @"*" + rtnstring;
-                return rtnstring;
+                return Path.GetFileName(FilePath);
             }
         }
         public bool UnsavedChanges { get; private set; }
