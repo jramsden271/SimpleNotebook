@@ -39,6 +39,7 @@ namespace SimpleNotebook
             openFile = (FileObject)lb_fileList.SelectedItem;
             tb_TextEditArea.Text = openFile.FileContents;
             lb_Title.Content = openFile.FileName;
+            //asdf
         }
 
 
