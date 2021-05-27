@@ -15,6 +15,7 @@ namespace SimpleNotebook
 
         public FileObjectCollection(string path)
         {
+            Path = path;
             foreach (string file in Directory.GetFiles(path))
             {
                 if (ValidFile(file))
@@ -38,6 +39,7 @@ namespace SimpleNotebook
                 _fileObjectCollection = value;
             }
         }
+        public string Path { get; private set; }
 
         //INTERFACE METHODS
         public IEnumerator<FileObject> GetEnumerator()
