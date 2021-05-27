@@ -44,7 +44,7 @@
     
     <Grid x:Name="grid_toplevel">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200px"></ColumnDefinition>
+            <ColumnDefinition Width="250px"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -81,9 +81,17 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Margin="5px">
+                    <Button Name="btn_OpenFolder" MinWidth="60px" Click="btn_OpenFolder_Click">Folder</Button>
+                    
+                </StackPanel>
+                
+            </Grid>
+            
         </Grid>
 
-
+        
 
 
         <TextBox
