@@ -24,8 +24,8 @@ namespace SimpleNotebook
         FileObject openFile;
         public MainWindow()
         {
-            //files = new FileObjectCollection(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            files = new FileObjectCollection(@"C:\Users\jramsden\OneDrive - BuroHappold\Notebook");
+            files = new FileObjectCollection(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+            //files = new FileObjectCollection(@"C:\Users\jramsden\OneDrive - BuroHappold\Notebook");
 
             //this.DataContext = files.FileObjects;
             //lb_fileList.DataContext = files;

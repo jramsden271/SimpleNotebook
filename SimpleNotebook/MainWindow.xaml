@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleNotebook"
         mc:Ignorable="d"
         Closing="win_MainWindow_Closing"
-        Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow">
+        Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow" MinHeight="200" MinWidth="400" >
     <Window.Resources>
         <AlternationConverter x:Key="BackgroundConverter">
             <SolidColorBrush Color="#19f39611" />
@@ -54,9 +54,10 @@
 
 
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" Background="#AAA">
+            <Button Name="btn_Save" DockPanel.Dock="Right" Width="100px" Height="30px" HorizontalAlignment="Right" Margin="10px" Click="btn_Save_Click">Save</Button>
             <Grid DockPanel.Dock="Left" Width="10px"></Grid>
             <Label Name="lb_Title" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0px" FontSize="18pt">Left</Label>
-            <Button Name="btn_Save" DockPanel.Dock="Right" Width="100px" Height="30px" HorizontalAlignment="Right" Margin="10px" Click="btn_Save_Click">Save</Button>
+            
         </DockPanel>
 
 
