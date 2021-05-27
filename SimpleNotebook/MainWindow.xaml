@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleNotebook"
         mc:Ignorable="d"
-        Title="Notebook" Height="450" Width="800" Background="DarkGray">
+        Closing="win_MainWindow_Closing"
+        Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow">
     <Window.Resources>
         <AlternationConverter x:Key="BackgroundConverter">
             <SolidColorBrush Color="#19f39611" />
@@ -80,16 +81,18 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        
-        
 
 
-        <TextBox 
+
+
+        <TextBox
             Name="tb_TextEditArea" 
             Grid.Row="1" Grid.Column="1" 
             IsReadOnly="False" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            AcceptsReturn="True"></TextBox>
+            AcceptsReturn="True"
+            TextWrapping="Wrap" >
+        </TextBox>
 
     </Grid>
 </Window>

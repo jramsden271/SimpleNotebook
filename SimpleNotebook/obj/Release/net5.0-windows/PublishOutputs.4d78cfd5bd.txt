@@ -1,0 +1,5 @@
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Release\net5.0-windows\publish\SimpleNotebook.exe
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Release\net5.0-windows\publish\SimpleNotebook.dll
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Release\net5.0-windows\publish\SimpleNotebook.deps.json
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Release\net5.0-windows\publish\SimpleNotebook.runtimeconfig.json
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Release\net5.0-windows\publish\SimpleNotebook.pdb
