@@ -10,13 +10,16 @@ namespace SimpleNotebook
 {
     public class FileObjectCollection : IEnumerable<FileObject>
     {
+        SettingsFile _settings;
+        
         //CONSTRUCTORS
-        public FileObjectCollection() { }
+        //public FileObjectCollection() { }
 
-        public FileObjectCollection(string path)
+        public FileObjectCollection(string settingsFolder)
         {
-            Path = path;
-            foreach (string file in Directory.GetFiles(path))
+            _settings = new SettingsFile(settingsFolder + @"\settings.txt");
+            CollectionPath = _settings.StartupPath;
+            foreach (string file in Directory.GetFiles(CollectionPath))
             {
                 if (ValidFile(file))
                 {
@@ -39,7 +42,7 @@ namespace SimpleNotebook
                 _fileObjectCollection = value;
             }
         }
-        public string Path { get; private set; }
+        public string CollectionPath { get; private set; }
 
         //INTERFACE METHODS
         public IEnumerator<FileObject> GetEnumerator()
@@ -70,12 +73,14 @@ namespace SimpleNotebook
             {
                 item.SetSortingIndex();
             }
+            
         }
 
         private bool ValidFile(string path)
         {
-            if (new FileInfo(path).Length > 50000) return false; //50kb limit on file size (can be changed if this value is not suitable)
-            else if (System.IO.Path.GetExtension(path) == @".exe") return false;
+            if (new FileInfo(path).Length > _settings.MaxFileObjectSize) return false; //50kb limit on file size (can be changed if this value is not suitable)
+            //else if (System.IO.Path.GetExtension(path) == @".exe") return false;
+            else if (_settings.IgnoredFileExtensions.Contains(Path.GetExtension(path))) return false;
             return true;
         }
 
