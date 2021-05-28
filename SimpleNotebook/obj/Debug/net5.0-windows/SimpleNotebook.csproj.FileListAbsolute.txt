@@ -19,4 +19,4 @@ C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windo
 C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windows\ref\SimpleNotebook.dll
 C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windows\SimpleNotebook.pdb
 C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windows\SimpleNotebook.genruntimeconfig.cache
-C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windows\SimpleNotebook.csprojAssemblyReference.cache
+C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\obj\Debug\net5.0-windows\SimpleNotebook.csproj.AssemblyReference.cache

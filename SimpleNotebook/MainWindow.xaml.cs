@@ -24,8 +24,8 @@ namespace SimpleNotebook
         FileObject openFile;
         public MainWindow()
         {
-            //files = new FileObjectCollection(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            files = new FileObjectCollection(@"C:\Users\jramsden\OneDrive - BuroHappold\Notebook");
+            files = new FileObjectCollection(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+            //files = new FileObjectCollection(@"C:\Users\jramsden\OneDrive - BuroHappold\Notebook");
             //files = new FileObjectCollection(@"C:\Users\jrams\Desktop\New folder");
         
 
@@ -59,7 +59,7 @@ namespace SimpleNotebook
 
         private void btn_OpenFolder_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe",files.Path);
+            System.Diagnostics.Process.Start("explorer.exe",files.CollectionPath);
         }
     }
 }
