@@ -32,7 +32,7 @@ namespace SimpleNotebook
             get => _filecontents;
             set
             {
-                UpdateFileContents(value);
+                UpdateFileContents(value, UpdateMethod.NoSaveToDisk);
             }
         }
 
@@ -52,28 +52,37 @@ namespace SimpleNotebook
             _filecontents = File.ReadAllText(FilePath);
         }
 
-        private void SaveFileContents()
+        private void SaveFileContentsToDisk()
         {
             File.WriteAllText(FilePath, _filecontents);
         }
 
-        public void UpdateFileContents(string fileContents, bool saveToDisk = false)
+        public void UpdateFileContents(string fileContents, UpdateMethod updateMethod)
         {
+            UnsavedChanges = FileContents != fileContents;
             _filecontents = fileContents;
-            if(saveToDisk)
+            if(updateMethod == UpdateMethod.ForceSaveToDisk)
             {
-                SaveFileContents();
+                SaveFileContentsToDisk();
                 UnsavedChanges = false;
             }
-            else
+            else if(updateMethod == UpdateMethod.SaveChangesToDisk && UnsavedChanges)
             {
-                UnsavedChanges = true;
+                SaveFileContentsToDisk();
+                UnsavedChanges = false;
             }
         }
 
         public void SetSortingIndex()
         {
             SortingIndex = Path.GetFileName(FilePath);
+        }
+
+        public enum UpdateMethod
+        {
+            NoSaveToDisk,
+            SaveChangesToDisk,
+            ForceSaveToDisk
         }
     }
 

@@ -19,6 +19,7 @@ namespace SimpleNotebook
 		public int MaxFileObjectSize { get; private set; }
 		public string[] IgnoredFileExtensions { get; private set; }
 		public string StartupPath { get; private set; }
+		public string[] IncludedFiles { get; private set; }
 
 		public void ReadSettingsFile()
 		{
@@ -38,6 +39,9 @@ namespace SimpleNotebook
 						break;
 					case "startuppath":
 						StartupPath = string.Concat(parts[1].Where(c => !char.IsWhiteSpace(c)));
+						break;
+					case "includedfiles":
+						IncludedFiles = parts[1].Trim().Split(',');
 						break;
 				}
 
