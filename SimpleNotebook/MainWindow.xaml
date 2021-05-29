@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleNotebook"
         mc:Ignorable="d"
         Closing="win_MainWindow_Closing"
-        Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow" MinHeight="200" MinWidth="400" >
+        Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow" MinHeight="200" MinWidth="400">
     <Window.Resources>
         <AlternationConverter x:Key="BackgroundConverter">
             <SolidColorBrush Color="#19f39611" />

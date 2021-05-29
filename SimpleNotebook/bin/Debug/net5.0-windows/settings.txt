@@ -1,3 +1,4 @@
-ignoredFiles:- .exe,.zip
+//ignoredFiles:- .exe,.zip
 maxFileSize:- 50000
-startupPath:- C:\Users\jrams\source\repos\SimpleNotebook\SimpleNotebook\bin\Debug\net5.0-windows
+startupPath:- C:\Users\jrams\OneDrive
+includedFiles:- .txt,.py,.cs

@@ -38,23 +38,27 @@ namespace SimpleNotebook
 
         private void lb_fileList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(openFile!=null) openFile.UpdateFileContents(tb_TextEditArea.Text, true);
+            if(openFile!=null)
+            {
+                openFile.UpdateFileContents(tb_TextEditArea.Text, FileObject.UpdateMethod.SaveChangesToDisk);
+            }
+
             openFile = (FileObject)lb_fileList.SelectedItem;
             tb_TextEditArea.Text = openFile.FileContents;
             lb_Title.Content = openFile.FileName;
             win_MainWindow.Title = openFile.FileName + " - SimpleNotebook";
-            //asdf
+            
         }
 
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            openFile.UpdateFileContents(tb_TextEditArea.Text, true);
+            openFile.UpdateFileContents(tb_TextEditArea.Text, FileObject.UpdateMethod.ForceSaveToDisk);
         }
 
         private void win_MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            openFile.UpdateFileContents(tb_TextEditArea.Text, true);
+            openFile.UpdateFileContents(tb_TextEditArea.Text, FileObject.UpdateMethod.SaveChangesToDisk);
         }
 
         private void btn_OpenFolder_Click(object sender, RoutedEventArgs e)
