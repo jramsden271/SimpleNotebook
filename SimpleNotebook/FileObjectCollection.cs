@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+//using System.Windows.Forms;
 
 namespace SimpleNotebook
 {
@@ -32,6 +36,8 @@ namespace SimpleNotebook
 
         //PRIVATE VARIABLES
         private List<FileObject> _fileObjectCollection = new List<FileObject>();
+
+        
 
         //PROPERTIES
         public List<FileObject> FileObjects
