@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+//using System.Windows.Forms;
 
 namespace SimpleNotebook
 {
-    public class FileObjectCollection : IEnumerable<FileObject>
+    public class FileObjectCollection : IEnumerable<FileObject>, INotifyPropertyChanged
     {
         SettingsFile _settings;
         
@@ -21,17 +25,21 @@ namespace SimpleNotebook
             CollectionPath = _settings.StartupPath;
             foreach (string file in Directory.GetFiles(CollectionPath))
             {
-                if (ValidFile(file))
+                try
                 {
-                    FileObjects.Add(new FileObject(file));
+                    if (ValidFile(file))
+                    {
+                        FileObjects.Add(new FileObject(file));
+                    }
                 }
+                catch { }
             }
             SetObjectSortingIndexByFileName();
             OrderObjects();
         }
 
         //PRIVATE VARIABLES
-        private List<FileObject> _fileObjectCollection = new List<FileObject>();
+        private List<FileObject> _fileObjectCollection = new();
 
         //PROPERTIES
         public List<FileObject> FileObjects
@@ -40,6 +48,7 @@ namespace SimpleNotebook
             set
             {
                 _fileObjectCollection = value;
+                NotifyPropertyChanged();
             }
         }
         public string CollectionPath { get; private set; }
@@ -53,6 +62,13 @@ namespace SimpleNotebook
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         //METHODS
@@ -78,9 +94,16 @@ namespace SimpleNotebook
 
         private bool ValidFile(string path)
         {
-            if (new FileInfo(path).Length > _settings.MaxFileObjectSize) return false; //50kb limit on file size (can be changed if this value is not suitable)
+            if (new FileInfo(path).Length > _settings.MaxFileObjectSize)
+            {
+                return false; //50kb limit on file size (can be changed if this value is not suitable)
+            }
             //else if (System.IO.Path.GetExtension(path) == @".exe") return false;
-            else if (_settings.IgnoredFileExtensions.Contains(Path.GetExtension(path))) return false;
+            else if (_settings.IncludedFiles != null && !_settings.IncludedFiles.Contains(Path.GetExtension(path)))
+            {
+                return false;
+            }
+            //else if (_settings.IgnoredFileExtensions != null && _settings.IgnoredFileExtensions.Contains(Path.GetExtension(path))) return false;
             return true;
         }
 
