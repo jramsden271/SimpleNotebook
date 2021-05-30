@@ -5,38 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.ComponentModel;
 
 namespace SimpleNotebook
 {
     public class FileObject
     {
-        public FileObject(string filepath)
+        public FileObject(string filepath, bool createNew = false)
         {
             if (File.Exists(filepath))
             {
                 _filecontents = File.ReadAllText(filepath);
-                _filepath = filepath;
+                FilePath = filepath;
             }
-            else
+            else if(!createNew)
             {
                 throw new IOException("The following path does not exist: " + filepath);
+            }
+            else if(createNew)
+            {
+                File.CreateText(filepath);
+                FilePath = filepath;
             }
         }
 
         private string _filecontents;
-        private string _filepath;
 
-        public string FilePath { get => _filepath; }
-        public string FileContents 
-        { 
-            get => _filecontents;
-            set
-            {
-                UpdateFileContents(value, UpdateMethod.NoSaveToDisk);
-            }
+        public string FilePath { get; }
+
+        public string GetFileContents()
+        {
+            return _filecontents;
         }
 
-        
+        public void SetFileContents(string value)
+        {
+            UpdateFileContents(value, UpdateMethod.NoSaveToDisk);
+        }
+
+
         public string SortingIndex { get; set; }
         public string FileName
         {
@@ -59,7 +66,7 @@ namespace SimpleNotebook
 
         public void UpdateFileContents(string fileContents, UpdateMethod updateMethod)
         {
-            UnsavedChanges = FileContents != fileContents;
+            UnsavedChanges = GetFileContents() != fileContents;
             _filecontents = fileContents;
             if(updateMethod == UpdateMethod.ForceSaveToDisk)
             {
@@ -83,6 +90,11 @@ namespace SimpleNotebook
             NoSaveToDisk,
             SaveChangesToDisk,
             ForceSaveToDisk
+        }
+
+        public override string ToString()
+        {
+            return FilePath;
         }
     }
 

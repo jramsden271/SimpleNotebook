@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleNotebook"
+        xmlns:local="clr-namespace:SimpleNotebook" 
+        d:DataContext="{d:DesignInstance Type=local:FileObjectCollection}"
         mc:Ignorable="d"
         Closing="win_MainWindow_Closing"
         Title="Notebook" Height="450" Width="800" Background="DarkGray" Name="win_MainWindow" MinHeight="200" MinWidth="400">
@@ -72,7 +73,7 @@
             </Grid.RowDefinitions>
             <ListBox Name="lb_fileList"  
                  Grid.Row="0" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                 ItemsSource="{Binding Path=FileObjects}" 
+                 ItemsSource="{Binding FileObjects, UpdateSourceTrigger=PropertyChanged}" 
                  SelectionChanged="lb_fileList_SelectionChanged"
                  ItemContainerStyle="{StaticResource Style1}">
                 <ListBox.ItemTemplate>
@@ -84,7 +85,8 @@
             <Grid Grid.Row="1" Grid.Column="0">
                 <StackPanel Orientation="Horizontal" Margin="5px">
                     <Button Name="btn_OpenFolder" MinWidth="60px" Click="btn_OpenFolder_Click">Folder</Button>
-                    
+                    <Button Name="btn_NewFile" MinWidth="60px" Click="btn_NewFile_Click">New</Button>
+                    <Button Name="btn_Reload" MinWidth="60px" Click="btn_Reload_Click">Reload</Button>
                 </StackPanel>
                 
             </Grid>

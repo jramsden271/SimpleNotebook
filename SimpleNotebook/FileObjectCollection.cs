@@ -23,19 +23,8 @@ namespace SimpleNotebook
         {
             _settings = new SettingsFile(settingsFolder + @"\settings.txt");
             CollectionPath = _settings.StartupPath;
-            foreach (string file in Directory.GetFiles(CollectionPath))
-            {
-                try
-                {
-                    if (ValidFile(file))
-                    {
-                        FileObjects.Add(new FileObject(file));
-                    }
-                }
-                catch { }
-            }
-            SetObjectSortingIndexByFileName();
-            OrderObjects();
+            ReLoadFiles();
+
         }
 
         //PRIVATE VARIABLES
@@ -48,7 +37,7 @@ namespace SimpleNotebook
             set
             {
                 _fileObjectCollection = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(FileObjects));
             }
         }
         public string CollectionPath { get; private set; }
@@ -56,7 +45,7 @@ namespace SimpleNotebook
         //INTERFACE METHODS
         public IEnumerator<FileObject> GetEnumerator()
         {
-            return _fileObjectCollection.GetEnumerator();
+            return FileObjects.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -78,14 +67,14 @@ namespace SimpleNotebook
         /// </summary>
         private void OrderObjects()
         {
-            var query = _fileObjectCollection.OrderBy(_fileObject => _fileObject.SortingIndex).Reverse();
-            _fileObjectCollection = query.ToList();
+            IEnumerable<FileObject> query = FileObjects.OrderBy(_fileObject => _fileObject.SortingIndex).Reverse();
+            FileObjects = query.ToList();
             
         }
 
         private void SetObjectSortingIndexByFileName()
         {
-            foreach (var item in _fileObjectCollection)
+            foreach (FileObject item in FileObjects)
             {
                 item.SetSortingIndex();
             }
@@ -109,14 +98,38 @@ namespace SimpleNotebook
 
         public List<FileObject> GetUnsavedFiles()
         {
-            var rtnList = new List<FileObject>();
-            foreach (var file in FileObjects)
+            List<FileObject> rtnList = new();
+            foreach (FileObject file in FileObjects)
             {
                 if (file.UnsavedChanges) rtnList.Add(file);
             }
             return rtnList;
         }
 
+        public void CreateNewFile(string fileName)
+        {
+            FileObjects.Add(new FileObject(CollectionPath + "\\" + fileName, true));
+            //NotifyPropertyChanged(nameof(FileObjects));
+        }
 
+        public void ReLoadFiles()
+        {
+            FileObjects.Clear();
+
+            foreach (string file in Directory.GetFiles(CollectionPath))
+            {
+                try
+                {
+                    if (ValidFile(file))
+                    {
+                        FileObjects.Add(new FileObject(file));
+                    }
+                }
+                catch { }
+            }
+
+            SetObjectSortingIndexByFileName();
+            OrderObjects();
+        }
     }
 }
